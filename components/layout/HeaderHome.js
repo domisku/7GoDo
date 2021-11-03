@@ -1,7 +1,11 @@
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import { faForward } from "@fortawesome/free-solid-svg-icons";
+import { useSession, signIn, signOut } from 'next-auth/react';
 
 function HeaderHome() {
+    const { data: session } = useSession();
+    console.log(session);
+
   return (
     <nav className="flex justify-around top-0 items-center h-20 fixed w-full bg-white">
       <h1 className="text-4xl text-red-500 cursor-pointer font-medium transition transform hover:translate-x-3">
