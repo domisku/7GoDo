@@ -21,7 +21,9 @@ export default async function auth(req, res) {
     ],
     pages: {
         signIn: '/signin',
-        verifyRequest: '/verify-request'
+        singOut: '/signout',
+        verifyRequest: '/verify-request',
+        error: '/error'
     }
 });
 }

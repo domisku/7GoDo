@@ -1,10 +1,16 @@
+import Link from "next/link";
+import { useSession } from 'next-auth/react';
+
 function ContentHome() {
+    const { data: session } = useSession();
+
     return (
         <main>
             <section className='flex justify-center items-center h-screen mt-14 overflow-hidden'>
                 <div className='flex flex-col items-center w-1/2 h-4/5'>
                     <h2 className='text-6xl font-bold text-center mb-10 leading-tight w-4/5'>Get everything done with GoDo</h2>
-                    <button className='flex items-center justify-center mb-16 w-1/5 px-4 py-2 bg-red-500 font-medium text-lg rounded-lg text-white hover:opacity-90'>Get Started</button>
+                    {!session && <Link href='signin'><button className='flex items-center justify-center mb-16 w-1/5 px-4 py-2 bg-red-500 font-medium text-lg rounded-lg text-white hover:opacity-90'>Get Started</button></Link>}
+                    {session && <Link href='app'><button className='flex items-center justify-center mb-16 w-1/5 px-4 py-2 bg-red-500 font-medium text-lg rounded-lg text-white hover:opacity-90'>Open App</button></Link>}
                     <div className='rounded-xl flex justify-center bg-red-100 px-6 py-6'>
                         <img className='rounded-xl' alt='calendar notebook' src='https://images.unsplash.com/photo-1529651737248-dad5e287768e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1965&q=80'></img>
                     </div>
@@ -37,7 +43,8 @@ function ContentHome() {
             <section className='flex justify-center items-center h-screen overflow-hidden bg-gray-50'>
                 <div className='relative top-16 flex flex-col items-center w-1/2 h-4/5'>
                     <h2 className='text-5xl font-bold text-center mb-10 mt-10 leading-tight w-4/5'>Reach your goals with GoDo</h2>
-                    <button className='flex items-center justify-center mb-16 w-1/5 px-4 py-2 bg-red-500 font-medium text-lg rounded-lg text-white hover:opacity-90'>Get Started</button>
+                    {!session && <Link href='signin'><button className='flex items-center justify-center mb-16 w-1/5 px-4 py-2 bg-red-500 font-medium text-lg rounded-lg text-white hover:opacity-90'>Get Started</button></Link>}
+                    {session && <Link href='app'><button className='flex items-center justify-center mb-16 w-1/5 px-4 py-2 bg-red-500 font-medium text-lg rounded-lg text-white hover:opacity-90'>Open App</button></Link>}
                     <div className='rounded-xl flex justify-center bg-red-100 px-6 py-6 w-3/5'>
                         <img className='rounded-xl' alt='calendar notebook' src='https://images.unsplash.com/photo-1525351159099-81893194469e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2065&q=80'></img>
                     </div>
