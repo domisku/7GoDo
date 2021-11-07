@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin');
+
 module.exports = {
   mode: 'jit',
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
@@ -23,5 +25,14 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    plugin(function({ addUtilities }) {
+      const newUtilities = {
+        '.custom-gradient': {
+          background: 'repeating-linear-gradient( #F3F4F6, #F3F4F6 3rem, #fff 0rem, #fff 6rem)'
+        }
+      };
+      addUtilities(newUtilities);
+    })
+  ],
 }

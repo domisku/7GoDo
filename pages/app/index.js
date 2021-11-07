@@ -1,6 +1,12 @@
+import Header from "../../components/layout/Header";
+import Sidebar from "../../components/layout/Sidebar";
+
 function App() {
     return (
-        <div>This is the app page</div>
+        <>
+            <Header />
+            <Sidebar />
+        </>
     );
 }
 
