@@ -16,7 +16,6 @@ function Today() {
     const { data: session, status } = useSession();
     const { data, error } = useSWR(session ? `/api/${session.user.name || session.user.email}`: null, fetcher);
     
-    const [click, setClick] = useState(false);
     const [input, setInput] = useState('');
 
     console.log(data);
@@ -45,16 +44,27 @@ function Today() {
         mutate(`/api/${session.user.name || session.user.email}`);
     }
 
-    function taskCompletedHandler(event) {
-        updateTask({ id: event.target.id });
+    async function taskCompletedHandler(event) {
+        if (event.target.id) {
+            const updatedData = data.map((task) => {
+                if (task._id === event.target.id) {
+                    task.status = 'completed';
+                }
+                return task;
+            });
 
-        const filteredData = data.filter((task) => task._id === event.target.id);
-        //to be completed
+            mutate(`/api/${session.user.name || session.user.email}`, [...updatedData, {}], false);
+
+            await updateTask({ id: event.target.id });
+
+            mutate(`/api/${session.user.name || session.user.email}`);
+        }
     }
 
     return (
         <Main>
             <h2 className='text-xl font-medium mb-4'>Today</h2>
+            <div className='overflow-y-scroll h-full pr-6'>
             <div className='custom-gradient'>
                 <form className='h-12 pl-4 py-2.5 text-lg text-red-500 hover:bg-red-50' onSubmit={formSubmitHandler}>
                     <button type='submit' disabled={!input}><Icon className='mr-3' icon={faPlus} fixedWidth ></Icon></button>
@@ -62,17 +72,13 @@ function Today() {
                 </form>
                 {data && data.map((task) => {return task.status === 'ongoing' ? <div key={task._id} className='h-12 pl-4 py-2.5 text-lg cursor-pointer hover:bg-red-50'><Icon id={task._id} onClick={taskCompletedHandler} className='mr-3' icon={faCircle} fixedWidth />{task.task}</div> : null;
                 })}
-                <div className='h-12 pl-4 py-2.5 text-lg hover:bg-red-50' onClick={() => setClick(!click)}>
-                    {!click ? <Icon className='mr-3' icon={faCircle} fixedWidth /> : <Icon className='mr-3' icon={faCheckCircle} fixedWidth /> }
-                    Palaistyti zole
-                </div>
-                <div className='pl-4 py-2.5 text-lg'>Palaistyti zole</div>
             </div> 
-            <h2 className='text-xl font-medium mb-4 mt-4'>Completed</h2>
-            <div className='custom-gradient'>
-                {data && data.map((task) => {return task.status === 'completed' ? 
-                    <div key={task._id} className='h-12 pl-4 py-2.5 text-lg cursor-pointer hover:bg-red-50'><Icon id={task._id} onClick={taskCompletedHandler} className='mr-3' icon={faCircle} fixedWidth />{task.task}</div> : null;
-                })}
+                <h2 className='text-xl font-medium mb-4 mt-4'>Completed</h2>
+                <div className='custom-gradient'>
+                    {data && data.map((task) => {return task.status === 'completed' ? 
+                        <div key={task._id} className='line-through h-12 pl-4 py-2.5 text-lg cursor-pointer hover:bg-red-50'><Icon className='mr-3' icon={faCheckCircle} fixedWidth />{task.task}</div> : null;
+                    })}
+                </div>
             </div>
         </Main>
     );

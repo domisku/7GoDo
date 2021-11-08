@@ -10,13 +10,13 @@ async function updateTask(req, res) {
   
       const tasksCollection = db.collection('tasks');
   
-      const result = await tasksCollection.updateOne({ _id: new ObjectId(data.id) }, {$set: {status: 'completed'}});
+      const result = await tasksCollection.findOneAndUpdate({ _id: new ObjectId(data.id) }, {$set: {status: 'completed'}}, {returnDocument: true});
   
       console.log(result);
   
       client.close();
   
-      res.status(201).json({ message: 'Task updated!' });
+      res.status(201).json({ result: result.value });
     }
   }
   

@@ -7,7 +7,9 @@ async function updateTask(enteredData) {
       },
     });
 
+    
     const data = await response.json();
+    return data.result;
   }
 
 export default updateTask;

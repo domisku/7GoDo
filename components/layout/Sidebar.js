@@ -49,7 +49,7 @@ function Sidebar() {
         </ul>
         <ul className='text-lg cursor-pointer'>
             {data && data.map((list) => {
-                return <li className='py-1.5 pl-6 hover:bg-white'><Icon className='mr-3' icon={faListUl} fixedWidth />{list.list}</li>
+                return <li id={list._id} className='py-1.5 pl-6 hover:bg-white'><Icon className='mr-3' icon={faListUl} fixedWidth />{list.list}</li>
             })}
             <li className='py-1.5 pl-6 hover:bg-white'><Icon className='mr-3' icon={faListUl} fixedWidth />Personal</li>
             <li className='py-1.5 pl-6 hover:bg-white'><Icon className='mr-3' icon={faListUl} fixedWidth />Work</li>
