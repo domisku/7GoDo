@@ -9,9 +9,27 @@ async function updateTask(req, res) {
       const db = client.db();
   
       const tasksCollection = db.collection('tasks');
-  
-      const result = await tasksCollection.findOneAndUpdate({ _id: new ObjectId(data.id) }, {$set: {status: 'completed'}}, {returnDocument: true});
-  
+
+      let result = '';
+
+      if (data.update === 'status') {
+        if (data.value === "completed") {
+          result = await tasksCollection.findOneAndUpdate({ _id: new ObjectId(data.id) }, {$set: {status: 'completed'}}, {returnDocument: true});
+        } else if (data.value === "ongoing") {
+          result = await tasksCollection.findOneAndUpdate({ _id: new ObjectId(data.id) }, {$set: {status: 'ongoing'}}, {returnDocument: true});
+        }
+      } else if (data.update === 'important') {
+        if (data.value === "true") {
+          result = await tasksCollection.findOneAndUpdate({ _id: new ObjectId(data.id) }, {$set: {important: 'true'}}, {returnDocument: true});
+        } else if (data.value === "false") {
+          result = await tasksCollection.findOneAndUpdate({ _id: new ObjectId(data.id) }, {$set: {important: 'false'}}, {returnDocument: true});
+        }
+      } else if (data.update === 'task') {
+        result = await tasksCollection.findOneAndUpdate({ _id: new ObjectId(data.id) }, {$set: {task: data.task }}, {returnDocument: true});
+      } else if (data.update === 'notes') {
+        result = await tasksCollection.findOneAndUpdate({ _id: new ObjectId(data.id) }, {$set: {notes: data.notes }}, {returnDocument: true});
+      }
+
       console.log(result);
   
       client.close();
