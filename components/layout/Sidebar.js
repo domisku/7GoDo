@@ -43,19 +43,16 @@ function Sidebar() {
         </Link>
         <ul className='mb-10 text-lg cursor-pointer'>
             <Link href='/app/today'><li className='py-1.5 pl-6 hover:bg-white'><Icon className='mr-3' icon={faBullseye} fixedWidth />Today</li></Link>
-            <li className='py-1.5 pl-6 hover:bg-white'><Icon className='mr-3' icon={faExclamationCircle} fixedWidth />Important</li>
-            <li className='py-1.5 pl-6 hover:bg-white'><Icon className='mr-3' icon={faCalendar} fixedWidth />Calendar</li>
-            <li className='py-1.5 pl-6 hover:bg-white'><Icon className='mr-3' icon={faGlobe} fixedWidth />All tasks</li>
+            <Link href='/app/important'><li className='py-1.5 pl-6 hover:bg-white'><Icon className='mr-3' icon={faExclamationCircle} fixedWidth />Important</li></Link>
+            <Link href='/app/calendar'><li className='py-1.5 pl-6 hover:bg-white'><Icon className='mr-3' icon={faCalendar} fixedWidth />Calendar</li></Link>
+            <Link href='/app/all'><li className='py-1.5 pl-6 hover:bg-white'><Icon className='mr-3' icon={faGlobe} fixedWidth />All tasks</li></Link>
         </ul>
         <ul className='text-lg cursor-pointer'>
-            {data && data.map((list) => {
-                return <li id={list._id} className='py-1.5 pl-6 hover:bg-white'><Icon className='mr-3' icon={faListUl} fixedWidth />{list.list}</li>
+            {data && data.map((list, index) => {
+                return <Link href={`/app/list/${list._id}?title=${list.list}`}><li id={list._id} className='py-1.5 pl-6 hover:bg-white'><Icon className='mr-3' icon={faListUl} fixedWidth />{list.list}</li></Link>
             })}
-            <li className='py-1.5 pl-6 hover:bg-white'><Icon className='mr-3' icon={faListUl} fixedWidth />Personal</li>
-            <li className='py-1.5 pl-6 hover:bg-white'><Icon className='mr-3' icon={faListUl} fixedWidth />Work</li>
-            <li className='py-1.5 pl-6 hover:bg-white'><Icon className='mr-3' icon={faListUl} fixedWidth />Groceries</li>
         </ul>
-        <form onSubmit={formSubmitHandler} className='py-1.5 pl-6 pb-6 w-full text-lg hover:bg-white'>
+        <form onSubmit={formSubmitHandler} className='py-1.5 h-10 pl-6 pb-6 w-full text-lg hover:bg-white'>
             <button type='submit' disabled={!newList}><Icon className='mr-3 text-red-500' icon={faPlus} fixedWidth /></button>
             <input value={newList} onChange={(event) => setNewList(event.target.value)} className='text-red-500 bg-transparent outline-none placeholder-red-500' placeholder='New list'></input>
         </form>

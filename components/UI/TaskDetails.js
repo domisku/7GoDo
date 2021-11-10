@@ -39,7 +39,7 @@ function TaskDetails(props) {
           id={props.taskData._id}
           onClick={(event) => props.taskCompletedHandler(event)}
         >
-          <Icon className="mr-3" icon={faCheckCircle} fixedWidth />
+          <Icon className="mr-3 pointer-events-none" icon={faCheckCircle} fixedWidth />
           {props.taskData.status === "ongoing" ? 'Mark as completed' : 'Restore task'}
         </div>
         <div
@@ -47,11 +47,11 @@ function TaskDetails(props) {
           id={props.taskData._id}
           onClick={(event) => props.markAsImportantHandler(event)}
         >
-          <Icon className="mr-3" icon={faExclamationCircle} fixedWidth />
+          <Icon className="mr-3 pointer-events-none" icon={faExclamationCircle} fixedWidth />
           {props.taskData.important === 'false' ? 'Mark as important' : 'Unmark'}
         </div>
         <div className="bg-gray-100 h-14 mb-2 flex items-center pl-4 rounded-lg">
-          <Icon className="mr-3" icon={faCalendar} fixedWidth />
+          <Icon className="mr-3 pointer-events-none" icon={faCalendar} fixedWidth />
           {props.taskData.date}
         </div>
         <div
@@ -59,7 +59,7 @@ function TaskDetails(props) {
           id={props.taskData._id}
           onClick={(event) => props.taskDeletedHandler(event.target.id)}
         >
-          <Icon className="mr-3" icon={faTrashAlt} fixedWidth />
+          <Icon className="mr-3 pointer-events-none" icon={faTrashAlt} fixedWidth />
           Delete task
         </div>
         <textarea
