@@ -35,7 +35,7 @@ function Sidebar() {
 
     return (
     <nav className='fixed z-30 top-0 left-0 h-screen w-1/6 bg-gray-50 overflow-y-scroll'>
-        <Link href='/app'>
+        <Link href='/'>
           <h1 className="text-3xl text-red-500 cursor-pointer mb-10 font-medium pt-6 pl-6">
             GoDo
             <Icon className="ml-1" icon={faForward} />

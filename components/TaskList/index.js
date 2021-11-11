@@ -32,9 +32,9 @@ function TaskList(props) {
     const taskData = {
       user: session.user.name || session.user.email,
       task: input,
-      date: formatTodaysDate(),
+      date: props.date || formatTodaysDate(),
       status: "ongoing",
-      important: "false",
+      important: props.filter === 'important' ? "true" : "false",
       listId: props.listId || null,
     };
 
@@ -209,6 +209,7 @@ function TaskList(props) {
 
   return (
     <Main
+      dataDidLoad={data}
       taskData={taskData}
       taskCompletedHandler={taskCompletedHandler}
       taskDeletedHandler={taskDeletedHandler}
@@ -216,8 +217,8 @@ function TaskList(props) {
       changeTaskNameHandler={changeTaskNameHandler}
       changeNotesHandler={changeNotesHandler}
     >
-      <h2 className="text-xl font-medium mb-4">{props.filter === 'today' ? "Today" : props.filter === 'important' ? "Important" : props.filter === 'all' ? 'All tasks' : props.listTitle || 'Tasks'}</h2>
-      <form
+      <h2 className="text-xl font-medium mb-4">{props.filter === 'today' ? "Today" : props.filter === 'important' ? "Important" : props.filter === 'all' ? 'All tasks' : props.listTitle ? props.listTitle : props.date ? [props.date, props.weekday].join(', ') : props.query ? 'Search results for: "' + props.query + '"' : 'Tasks'}</h2>
+      {!props.query && <form
         className="h-12 pl-4 mr-10 py-2.5 text-lg text-red-500 border-b-2 border-red-500 rounded-lg"
         onSubmit={formSubmitHandler}
       >
@@ -230,11 +231,11 @@ function TaskList(props) {
           value={input}
           onChange={(event) => setInput(event.target.value)}
         ></input>
-      </form>
+      </form>}
       <div className={`overflow-y-scroll h-full pr-6`}>
         <div className="custom-gradient">
           {data &&
-            data.filter((task) => task.status === "ongoing" && (props.filter === 'important' ? task.important === 'true' : props.filter === 'today' ? task.date === formatTodaysDate() : true) && (props.listId ? task.listId === props.listId : task.listId === null)
+            data.filter((task) => task.status === "ongoing" && (props.filter === 'important' ? task.important === 'true' : props.filter === 'today' ? task.date === formatTodaysDate() : true) && (props.listId ? task.listId === props.listId : task.listId === null) && (props.date ? props.date === task.date : true) && (props.query ? task.task.toLowerCase().includes(props.query.toLowerCase()) : true)
             ).map((task) => {
               return (
                 <>
@@ -271,7 +272,7 @@ function TaskList(props) {
         <h2 className="text-xl font-medium mb-4 mt-4">Completed</h2>
         <div className="custom-gradient">
           {data &&
-            data.filter((task) => task.status === "completed" && (props.filter === 'important' ? task.important === 'true' : props.filter === 'today' ? task.date === formatTodaysDate() : true) && (props.listId ? task.listId === props.listId : task.listId === null)).map((task) => {
+            data.filter((task) => task.status === "completed" && (props.filter === 'important' ? task.important === 'true' : props.filter === 'today' ? task.date === formatTodaysDate() : true) && (props.listId ? task.listId === props.listId : task.listId === null) && (props.date ? props.date === task.date : true) && (props.query ? task.task.toLowerCase().includes(props.query.toLowerCase()) : true)).map((task) => {
               return (
                 <div
                   key={task._id}

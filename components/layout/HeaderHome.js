@@ -30,7 +30,7 @@ function HeaderHome() {
       )}
       {session && (
         <ul className="flex h-20">
-          <Link href="/app">
+          <Link href="/app/today">
             <li className="flex items-center h-full px-6 text-xl cursor-pointer border-b-2 border-transparent hover:border-red-500 hover:bg-red-50">
               Open App
             </li>

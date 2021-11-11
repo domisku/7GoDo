@@ -4,6 +4,7 @@ import {
 } from "next-auth/react";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import { faForward } from "@fortawesome/free-solid-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons"
 import Link from "next/link";
 import { useState } from "react";
 import DialogBox from "../../components/UI/DialogBox";
@@ -54,7 +55,7 @@ function SignIn({ providers }) {
                     className="flex items-center justify-center w-full h-10 mb-2 px-4 py-2 border-2 font-medium text-md rounded-lg hover:bg-gray-100"
                     onClick={() => signIn(provider.id, { callbackUrl: 'http://localhost:3000/' })}
                   >
-                    Continue with {provider.name}
+                    <Icon className='text-xl mr-2' icon={faGithub} />Continue with {provider.name}
                   </button>
                 </div>
               );
@@ -89,8 +90,7 @@ function SignIn({ providers }) {
             Sign in with Email
           </button>
           <p className="mb-2">
-            By continuing with Github or Email, you agree to GoDo's Terms of
-            Service and Privacy Policy.
+            Logging in with email or Github doesn't require you to create a password, keeping your private information safe!
           </p>
         </form>
         <Link href="/">
