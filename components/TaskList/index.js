@@ -207,6 +207,8 @@ function TaskList(props) {
     }
   }
 
+  let filteredDataNotEmpty = data ? data.filter((task) => task.status === "completed" && (props.filter === 'important' ? task.important === 'true' : props.filter === 'today' ? task.date === formatTodaysDate() : true) && (props.listId ? task.listId === props.listId : task.listId === null) && (props.date ? props.date === task.date : true) && (props.query ? task.task.toLowerCase().includes(props.query.toLowerCase()) : true))[0] : null;
+
   return (
     <Main
       dataDidLoad={data}
@@ -219,7 +221,7 @@ function TaskList(props) {
     >
       <h2 className="text-xl font-medium mb-4">{props.filter === 'today' ? "Today" : props.filter === 'important' ? "Important" : props.filter === 'all' ? 'All tasks' : props.listTitle ? props.listTitle : props.date ? [props.date, props.weekday].join(', ') : props.query ? 'Search results for: "' + props.query + '"' : 'Tasks'}</h2>
       {!props.query && <form
-        className="h-12 pl-4 mr-10 py-2.5 text-lg text-red-500 border-b-2 border-red-500 rounded-lg"
+        className="h-12 pl-4 mr-10 py-2.5 text-lg bg-white shadow-lg text-red-500 mb-4 rounded-lg"
         onSubmit={formSubmitHandler}
       >
         <button type="submit" disabled={!input}>
@@ -233,17 +235,17 @@ function TaskList(props) {
         ></input>
       </form>}
       <div className={`overflow-y-scroll h-full pr-6`}>
-        <div className="custom-gradient">
+        <div>
           {data &&
             data.filter((task) => task.status === "ongoing" && (props.filter === 'important' ? task.important === 'true' : props.filter === 'today' ? task.date === formatTodaysDate() : true) && (props.listId ? task.listId === props.listId : task.listId === null) && (props.date ? props.date === task.date : true) && (props.query ? task.task.toLowerCase().includes(props.query.toLowerCase()) : true)
-            ).map((task) => {
+            ).map((task, index) => {
               return (
                 <>
                   <div
                     key={task._id}
                     id={task._id}
                     onClick={taskClickHandler}
-                    className={`h-12 pl-4 py-2.5 text-lg cursor-pointer flex items-center hover:bg-gray-200 ${
+                    className={`h-12 pl-4 py-2.5 text-lg cursor-pointer flex items-center rounded-lg ${index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50'} hover:bg-gray-200 ${
                       taskData._id === task._id && task._id
                         ? "hover:bg-gray-400 bg-gray-400 text-white"
                         : ""
@@ -269,16 +271,16 @@ function TaskList(props) {
               );
             })}
         </div>
-        <h2 className="text-xl font-medium mb-4 mt-4">Completed</h2>
-        <div className="custom-gradient">
+        <h2 className="text-xl font-medium mb-4 mt-4">{filteredDataNotEmpty && 'Completed'}</h2>
+        <div>
           {data &&
-            data.filter((task) => task.status === "completed" && (props.filter === 'important' ? task.important === 'true' : props.filter === 'today' ? task.date === formatTodaysDate() : true) && (props.listId ? task.listId === props.listId : task.listId === null) && (props.date ? props.date === task.date : true) && (props.query ? task.task.toLowerCase().includes(props.query.toLowerCase()) : true)).map((task) => {
+            data.filter((task) => task.status === "completed" && (props.filter === 'important' ? task.important === 'true' : props.filter === 'today' ? task.date === formatTodaysDate() : true) && (props.listId ? task.listId === props.listId : task.listId === null) && (props.date ? props.date === task.date : true) && (props.query ? task.task.toLowerCase().includes(props.query.toLowerCase()) : true)).map((task, index) => {
               return (
                 <div
                   key={task._id}
                   id={task._id}
                   onClick={taskClickHandler}
-                  className={`line-through h-12 pl-4 py-2.5 text-lg cursor-pointer flex items-center hover:bg-gray-200 ${
+                  className={`line-through h-12 pl-4 py-2.5 text-lg cursor-pointer flex items-center rounded-lg ${index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50'} hover:bg-gray-200 ${
                     taskData._id === task._id
                       ? "hover:bg-gray-400 bg-gray-400 text-white"
                       : ""

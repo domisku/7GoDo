@@ -4,9 +4,9 @@ import { faForward } from "@fortawesome/free-solid-svg-icons";
 function Loading() {
     return (
             <div className='flex items-center justify-center h-screen w-screen absolute bg-white top-0 left-0 z-50'>
-              <div class="flex justify-center items-center">
+              <div className="flex justify-center items-center">
                 <div
-                  class="animate-spin rounded-full h-36 w-36 border-b-4 border-red-500"
+                  className="animate-spin rounded-full h-36 w-36 border-b-4 border-red-500"
                 ></div>
               </div>
               <div className='absolute bottom-28'>

@@ -29,7 +29,7 @@ module.exports = {
     plugin(function({ addUtilities }) {
       const newUtilities = {
         '.custom-gradient': {
-          background: 'repeating-linear-gradient( #F3F4F6, #F3F4F6 3rem, #fff 0rem, #fff 6rem)'
+          background: 'repeating-linear-gradient( #F3F4F6, #F3F4F6 3rem, #F9FAFB 0rem, #F9FAFB 6rem)'
         }
       };
       addUtilities(newUtilities);
