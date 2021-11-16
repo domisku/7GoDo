@@ -52,10 +52,10 @@ function Calendar() {
         onClick={() => setCalendarActive(true)}
         className="flex justify-center items-center absolute z-40 bottom-16 right-24 cursor-pointer shadow-xl rounded-full bg-white w-20 h-20 text-3xl text-red-500"
         show={!calendarActive}
-        enter="transition-opacity duration-100"
+        enter="transition-opacity duration-700"
         enterFrom="opacity-0"
         enterTo="opacity-100"
-        leave="transition-opacity duration-100"
+        leave="transition-opacity duration-200"
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
@@ -64,12 +64,12 @@ function Calendar() {
       <Transition
         className='absolute z-40 bottom-0 right-0 rounded-lg'
         show={calendarActive}
-        enter="transition-all duration-100"
+        enter="transition-all duration-200"
         enterFrom="opacity-0 -translate-y-20"
         enterTo="opacity-100 translate-y-0"
-        leave="transition-opacity duration-100"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
+        leave="transition-all duration-200"
+        leaveFrom="opacity-100 translate-y-0"
+        leaveTo="opacity-0 -translate-y-20"
         >
         <div onMouseEnter={mouseEnterHandler} onMouseLeave={mouseLeaveHandler} >
             <ReactCalendar

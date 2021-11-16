@@ -6,7 +6,7 @@ import Link from "next/link";
 function SignOut() {
   return (
     <div className="flex justify-center items-center h-screen bg-gray-50">
-      <div className="relative -top-20 w-4/12 bg-white p-14 border rounded-lg">
+      <div className="relative xl:-top-16 w-full sm:w-9/12 md:w-8/12 lg:w-6/12 xl:w-5/12 2xl:w-4/12 bg-white p-8 sm:p-14 border rounded-lg shadow-lg">
         <Link href="/">
           <h1 className="text-2xl text-red-500 cursor-pointer mb-4 font-medium">
             GoDo

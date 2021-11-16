@@ -36,8 +36,8 @@ function SignIn({ providers }) {
     }
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-50">
-      <div className="relative -top-20 w-4/12 bg-white p-14 border rounded-lg">
+    <div className="flex justify-center items-center h-screen bg-gray-50 landscape:py-72">
+      <div className="relative xl:-top-16 w-full sm:w-9/12 md:w-8/12 lg:w-6/12 xl:w-5/12 2xl:w-4/12 bg-white p-8 sm:p-14 border rounded-lg shadow-lg">
         <Link href='/'>
           <h1 className="text-2xl text-red-500 cursor-pointer mb-4 font-medium">
             GoDo
@@ -72,19 +72,20 @@ function SignIn({ providers }) {
           <label className="font-medium mb-1">Email</label>
           <div className='relative w-full'>
             <input
-                className={`border-2 bg-gray-100 hover:bg-white focus:bg-white px-3 rounded-lg h-10 mb-4 w-full ${error ? 'border-red-500 bg-red-50 outline-none' : ''}`}
+                className={`border-2 bg-gray-100 hover:bg-white focus:bg-white px-3 rounded-lg h-10 w-full ${error ? 'border-red-500 bg-red-50 outline-none' : ''}`}
                 type="email"
                 id="email"
                 name="email"
                 value={email}
                 onChange={inputChangeHandler}
             />
-            {error && <div className='animate-slide absolute top-0 -right-60'>
+            {error && (<><div className='hidden lg:inline animate-slide absolute top-0 -right-60'>
                 <DialogBox message='Please enter a valid email' />
-            </div>}
+            </div>
+            <span className='block lg:hidden text-red-500 font-medium mt-1'>Please enter a valid email</span></>)}
           </div>
           <button
-            className="flex items-center justify-center mb-6 px-4 py-2 bg-red-500 font-medium text-lg rounded-lg text-white hover:opacity-90"
+            className="flex items-center justify-center mb-6 px-4 py-2 mt-4 bg-red-500 font-medium text-lg rounded-lg text-white hover:opacity-90"
             type="submit"
           >
             Sign in with Email

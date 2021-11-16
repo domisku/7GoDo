@@ -219,7 +219,7 @@ function TaskList(props) {
       changeTaskNameHandler={changeTaskNameHandler}
       changeNotesHandler={changeNotesHandler}
     >
-      <h2 className="text-xl font-medium mb-4">{props.filter === 'today' ? "Today" : props.filter === 'important' ? "Important" : props.filter === 'all' ? 'All tasks' : props.listTitle ? props.listTitle : props.date ? [props.date, props.weekday].join(', ') : props.query ? 'Search results for: "' + props.query + '"' : 'Tasks'}</h2>
+      <h2 className="w-11/12 break-words text-xl font-medium mb-4">{props.filter === 'today' ? "Today" : props.filter === 'important' ? "Important" : props.filter === 'all' ? 'All tasks' : props.listTitle ? props.listTitle : props.date ? [props.date, props.weekday].join(', ') : props.query ? 'Search results for: "' + props.query + '"' : 'Tasks'}</h2>
       {!props.query && <form
         className="h-12 pl-4 mr-10 py-2.5 text-lg bg-white shadow-lg text-red-500 mb-4 rounded-lg"
         onSubmit={formSubmitHandler}
@@ -245,10 +245,10 @@ function TaskList(props) {
                     key={task._id}
                     id={task._id}
                     onClick={taskClickHandler}
-                    className={`h-12 pl-4 py-2.5 text-lg cursor-pointer flex items-center rounded-lg ${index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50'} hover:bg-gray-200 ${
+                    className={`w-full ${taskData._id === task._id ? '' : 'h-12'} pl-4 py-2.5 text-lg cursor-pointer flex items-center rounded-lg ${index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50'} ${
                       taskData._id === task._id && task._id
                         ? "hover:bg-gray-400 bg-gray-400 text-white"
-                        : ""
+                        : "hover:bg-gray-200"
                     }`}
                   >
                     <Icon
@@ -258,7 +258,7 @@ function TaskList(props) {
                       icon={faCircle}
                       fixedWidth
                     />
-                    {task.task}
+                    <span className={`${taskData._id === task._id ? '' : 'truncate'} w-11/12 break-words pointer-events-none`}>{task.task}</span>
                     {task.important === "true" ? (
                       <Icon
                         className="ml-auto mr-4"
@@ -280,14 +280,14 @@ function TaskList(props) {
                   key={task._id}
                   id={task._id}
                   onClick={taskClickHandler}
-                  className={`line-through h-12 pl-4 py-2.5 text-lg cursor-pointer flex items-center rounded-lg ${index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50'} hover:bg-gray-200 ${
+                  className={`line-through w-full ${taskData._id === task._id ? '' : 'h-12'} pl-4 py-2.5 text-lg cursor-pointer flex items-center rounded-lg ${index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-50'} ${
                     taskData._id === task._id
                       ? "hover:bg-gray-400 bg-gray-400 text-white"
-                      : ""
+                      : "hover:bg-gray-200"
                   }`}
                 >
                   <Icon className="mr-3" icon={faCheckCircle} fixedWidth />
-                  {task.task}
+                  <span className={`${taskData._id === task._id ? '' : 'truncate'} w-11/12 break-words pointer-events-none`}>{task.task}</span>
                   {task.important === "true" ? (
                     <Icon
                       className="ml-auto mr-4"

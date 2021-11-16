@@ -6,8 +6,14 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      transitionDuration: {
+        '320': '320ms'
+      },
       rotate: {
         '135': '135deg'
+      },
+      screens: {
+        'landscape': {'raw': '(orientation: landscape)'},
       },
       keyframes: {
         slide: {

@@ -23,7 +23,7 @@ function TaskDetails(props) {
   }
 
   return (
-    <div className={`fixed z-20 right-0 top-12 h-full w-1/6 mr-px bg-gray-200 ${!props.taskData ? 'hidden' : ''}`}>
+    <div className={`animate-slide fixed z-20 right-0 top-12 h-full bg-gray-200 ${!props.taskData ? 'hidden' : ''}`}>
       <div className="p-6 text-lg">
         <input
           value={taskName}
