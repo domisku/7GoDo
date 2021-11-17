@@ -57,6 +57,8 @@ function Sidebar() {
   }
 
   async function listDeletedHandler(event) {
+    event.stopPropagation();
+
     if (event.target.id) {
       const filteredData = data.filter((list) => list._id !== event.target.id);
 
@@ -90,7 +92,7 @@ function Sidebar() {
           <Icon
             className={`${
               !ctx.sidebarExpanded
-                ? "absolute bottom-8 right-3.5 visible"
+                ? "invisible"
                 : "ml-1.5"
             }`}
             icon={faForward}
@@ -99,7 +101,7 @@ function Sidebar() {
       </Link>
       <button
         onClick={ctx.toggleSidebar}
-        className="absolute top-5 w-12 h-12 right-2 flex justify-center items-center text-xl text-right hover:bg-white rounded-full text-gray-500 bg-gray-100 shadow-lg"
+        className={`absolute top-5 transition-all duration-100 ${!ctx.sidebarExpanded ? 'w-10/12' : 'w-12'} h-12 right-1.5 flex justify-center items-center text-xl text-right hover:bg-white rounded-full text-gray-500 bg-gray-100 shadow-lg`}
       >
         <Icon
           icon={ctx.sidebarExpanded ? faChevronLeft : faChevronRight}

@@ -207,12 +207,17 @@ function TaskList(props) {
     }
   }
 
+  function clearTaskData() {
+    setTaskData('');
+  }
+
   let filteredDataNotEmpty = data ? data.filter((task) => task.status === "completed" && (props.filter === 'important' ? task.important === 'true' : props.filter === 'today' ? task.date === formatTodaysDate() : true) && (props.listId ? task.listId === props.listId : task.listId === null) && (props.date ? props.date === task.date : true) && (props.query ? task.task.toLowerCase().includes(props.query.toLowerCase()) : true))[0] : null;
 
   return (
     <Main
       dataDidLoad={data}
       taskData={taskData}
+      clearTaskData={clearTaskData}
       taskCompletedHandler={taskCompletedHandler}
       taskDeletedHandler={taskDeletedHandler}
       markAsImportantHandler={markAsImportantHandler}
@@ -221,20 +226,20 @@ function TaskList(props) {
     >
       <h2 className="w-11/12 break-words text-xl font-medium mb-4">{props.filter === 'today' ? "Today" : props.filter === 'important' ? "Important" : props.filter === 'all' ? 'All tasks' : props.listTitle ? props.listTitle : props.date ? [props.date, props.weekday].join(', ') : props.query ? 'Search results for: "' + props.query + '"' : 'Tasks'}</h2>
       {!props.query && <form
-        className="h-12 pl-4 mr-10 py-2.5 text-lg bg-white shadow-lg text-red-500 mb-4 rounded-lg"
+        className="relative right-2 h-14 flex items-center mr-10 pr-5 pl-4 py-2.5 text-lg bg-white shadow-lg text-red-500 mb-4 rounded-lg"
         onSubmit={formSubmitHandler}
       >
         <button type="submit" disabled={!input}>
           <Icon className="mr-3" icon={faPlus} fixedWidth></Icon>
         </button>
         <input
-          className="w-11/12 outline-none bg-transparent placeholder-red-500"
-          placeholder="Add a new task"
+          className="w-9/12 outline-none bg-transparent placeholder-red-500"
+          placeholder="New task"
           value={input}
           onChange={(event) => setInput(event.target.value)}
         ></input>
       </form>}
-      <div className={`overflow-y-scroll h-full pr-6`}>
+      <div className={`overflow-y-scroll h-custom pr-6`}>
         <div>
           {data &&
             data.filter((task) => task.status === "ongoing" && (props.filter === 'important' ? task.important === 'true' : props.filter === 'today' ? task.date === formatTodaysDate() : true) && (props.listId ? task.listId === props.listId : task.listId === null) && (props.date ? props.date === task.date : true) && (props.query ? task.task.toLowerCase().includes(props.query.toLowerCase()) : true)
@@ -272,7 +277,7 @@ function TaskList(props) {
             })}
         </div>
         <h2 className="text-xl font-medium mb-4 mt-4">{filteredDataNotEmpty && 'Completed'}</h2>
-        <div>
+        <div className='mb-6'>
           {data &&
             data.filter((task) => task.status === "completed" && (props.filter === 'important' ? task.important === 'true' : props.filter === 'today' ? task.date === formatTodaysDate() : true) && (props.listId ? task.listId === props.listId : task.listId === null) && (props.date ? props.date === task.date : true) && (props.query ? task.task.toLowerCase().includes(props.query.toLowerCase()) : true)).map((task, index) => {
               return (

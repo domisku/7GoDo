@@ -37,7 +37,7 @@ function Calendar() {
   }
 
   function mouseLeaveHandler() {
-      timeout = setTimeout(() => setCalendarActive(false), 1000)
+      timeout = setTimeout(() => setCalendarActive(false), 3000)
   }
 
   function mouseEnterHandler() {
@@ -50,7 +50,7 @@ function Calendar() {
       <Transition
         onMouseEnter={() => setCalendarActive(true)}
         onClick={() => setCalendarActive(true)}
-        className="flex justify-center items-center absolute z-40 bottom-16 right-24 cursor-pointer shadow-xl rounded-full bg-white w-20 h-20 text-3xl text-red-500"
+        className="flex justify-center items-center opacity-40 md:opacity-100 absolute z-40 bottom-16 right-24 cursor-pointer shadow-xl rounded-full bg-white w-20 h-20 text-3xl text-red-500"
         show={!calendarActive}
         enter="transition-opacity duration-700"
         enterFrom="opacity-0"
@@ -75,7 +75,7 @@ function Calendar() {
             <ReactCalendar
                 onChange={onChange}
                 value={value}
-                className="rounded-tl-lg shadow-2xl p-2 grayscale"
+                className="pl-6 pr-0 sm:px-4 rounded-tl-lg shadow-2xl p-2 grayscale"
             />
         </div>
       </Transition>

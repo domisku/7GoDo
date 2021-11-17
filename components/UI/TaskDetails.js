@@ -23,7 +23,7 @@ function TaskDetails(props) {
   }
 
   return (
-    <div className={`animate-slide fixed z-20 right-0 top-12 h-full bg-gray-200 ${!props.taskData ? 'hidden' : ''}`}>
+    <div className={`animate-slide fixed w-60 sm:w-72 overflow-y-scroll overflow-x-hidden z-20 right-0 top-12 h-sidebar bg-gray-200 ${!props.taskData ? 'hidden' : ''}`}>
       <div className="p-6 text-lg">
         <input
           value={taskName}
@@ -31,11 +31,11 @@ function TaskDetails(props) {
           onFocus={() => setTaskName(props.taskData.task)}
           onBlur={blurHandler}
           onChange={(event) => setTaskName(event.target.value)}
-          className="text-xl font-medium mb-4 outline-none bg-transparent h-10 rounded-lg placeholder-black hover:bg-gray-100"
+          className="text-xl font-medium mb-4 w-full outline-none bg-transparent h-10 rounded-lg placeholder-black hover:bg-gray-100"
           placeholder={props.taskData.task}
         ></input>
         <div
-          className="bg-gray-100 h-14 mb-2 flex items-center pl-4 cursor-pointer rounded-lg hover:bg-gray-50"
+          className="bg-gray-100 h-14 mb-2 flex items-center pl-4 cursor-pointer rounded-lg hover:bg-gray-50 shadow"
           id={props.taskData._id}
           onClick={(event) => props.taskCompletedHandler(event)}
         >
@@ -43,19 +43,19 @@ function TaskDetails(props) {
           {props.taskData.status === "ongoing" ? 'Mark as completed' : 'Restore task'}
         </div>
         <div
-          className="bg-gray-100 h-14 mb-2 flex items-center pl-4 cursor-pointer rounded-lg hover:bg-gray-50"
+          className="bg-gray-100 h-14 mb-2 flex items-center pl-4 cursor-pointer rounded-lg hover:bg-gray-50 shadow"
           id={props.taskData._id}
           onClick={(event) => props.markAsImportantHandler(event)}
         >
           <Icon className="mr-3 pointer-events-none" icon={faExclamationCircle} fixedWidth />
           {props.taskData.important === 'false' ? 'Mark as important' : 'Unmark'}
         </div>
-        <div className="bg-gray-100 h-14 mb-2 flex items-center pl-4 rounded-lg">
+        <div className="bg-gray-100 h-14 mb-2 flex items-center pl-4 rounded-lg shadow">
           <Icon className="mr-3 pointer-events-none" icon={faCalendar} fixedWidth />
           {props.taskData.date}
         </div>
         <div
-          className="bg-gray-100 h-14 mb-2 flex items-center pl-4 cursor-pointer rounded-lg hover:bg-gray-50"
+          className="bg-gray-100 h-14 mb-2 flex items-center pl-4 cursor-pointer rounded-lg hover:bg-gray-50 shadow"
           id={props.taskData._id}
           onClick={(event) => props.taskDeletedHandler(event.target.id)}
         >
@@ -63,7 +63,7 @@ function TaskDetails(props) {
           Delete task
         </div>
         <textarea
-          className={`bg-gray-100 h-28 mb-2 flex items-center pl-4 pt-2 pr-4 max-h-48 w-full rounded-lg outline-none hover:bg-gray-50 focus:bg-gray-50 ${props.taskData.notes ? 'placeholder-black' : ''}`}
+          className={`bg-gray-100 h-28 mb-2 flex items-center pl-4 pt-2 pr-4 max-h-48 w-full rounded-lg outline-none hover:bg-gray-50 focus:bg-gray-50 shadow ${props.taskData.notes ? 'placeholder-black' : ''}`}
           value={notes}
           id={props.taskData._id}
           onFocus={() => setNotes(props.taskData.notes)}
@@ -71,6 +71,7 @@ function TaskDetails(props) {
           onChange={(event) => setNotes(event.target.value)}
           placeholder={props.taskData.notes || "Notes"}
         ></textarea>
+        <button onClick={() => props.clearTaskData()} className='h-12 w-1/2 mt-8 bg-gray-100 hover:bg-gray-50 rounded-lg shadow'>Close</button>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ function ContentHome() {
     return (
         <main>
             <section className='flex justify-center items-center h-full my-24'>
-                <div className='flex flex-col items-center w-4/5 md:w-3/5 xl:w-1/2 h-4/5'>
+                <div className='flex flex-col items-center pt-4 mb-36 w-4/5 md:w-3/5 xl:w-1/2 h-4/5'>
                     <h2 className='text-4xl sm:text-6xl font-bold text-center mb-10 leading-tight w-full'>Get everything done with GoDo</h2>
                     {!session && <Link href='signin'><button className='flex items-center justify-center mb-10 w-40 px-4 py-2 bg-red-500 font-medium text-lg rounded-lg text-white hover:opacity-90'>Get Started</button></Link>}
                     {session && <Link href='/app/today'><button className='flex items-center justify-center mb-10 w-40 px-4 py-2 bg-red-500 font-medium text-lg rounded-lg text-white hover:opacity-90'>Open App</button></Link>}

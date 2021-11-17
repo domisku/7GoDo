@@ -9,7 +9,7 @@ function Loading() {
                   className="animate-spin rounded-full h-36 w-36 border-b-4 border-red-500"
                 ></div>
               </div>
-              <div className='absolute bottom-28'>
+              <div className='absolute bottom-28 invisible lg:visible'>
                 <h1 className="text-4xl text-red-500 cursor-pointer mb-10 font-medium pt-6 pl-6">
                     GoDo
                 <Icon className="ml-1" icon={faForward} />

@@ -25,6 +25,13 @@ module.exports = {
       },
       animation: {
         slide: 'slide 300ms ease-in-out forwards',
+      },
+      height: {
+        custom: 'calc(100vh - 11.2rem)',
+        sidebar: 'calc(100% - 3rem)'
+      },
+      width: {
+        custom: 'calc(100% - 18rem)',
       }
     }
   },
