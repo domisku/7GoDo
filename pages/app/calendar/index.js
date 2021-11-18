@@ -4,7 +4,9 @@ import "react-calendar/dist/Calendar.css";
 import { useState } from "react";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
-import { Transition } from '@headlessui/react'
+import { Transition } from '@headlessui/react';
+import Head from "next/dist/shared/lib/head";
+
 
 const weekday = [
   "Sunday",
@@ -46,6 +48,10 @@ function Calendar() {
 
   return (
     <>
+      <Head>
+        <title>Calendar</title>
+        <meta name='description' content='Explore the calendar. Add a task at any date.' />
+      </Head>
       <TaskList date={formatDate(value)} weekday={getWeekday(value)} />
       <Transition
         onMouseEnter={() => setCalendarActive(true)}

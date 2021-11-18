@@ -8,6 +8,7 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons"
 import Link from "next/link";
 import { useState } from "react";
 import DialogBox from "../../components/UI/DialogBox";
+import Head from "next/dist/shared/lib/head";
 
 function SignIn({ providers }) {
     const [email, setEmail] = useState('');
@@ -36,6 +37,11 @@ function SignIn({ providers }) {
     }
 
   return (
+    <>
+    <Head>
+      <title>Sign In</title>
+      <meta name='description' content='Sign in to GoDo and start planning your day!' />
+    </Head>
     <div className="flex justify-center items-center h-screen bg-gray-50 landscape:py-72">
       <div className="relative xl:-top-16 w-full sm:w-9/12 md:w-8/12 lg:w-6/12 xl:w-5/12 2xl:w-4/12 bg-white p-8 sm:p-14 border rounded-lg shadow-lg">
         <Link href='/'>
@@ -99,6 +105,7 @@ function SignIn({ providers }) {
         </Link>
       </div>
     </div>
+    </>
   );
 }
 

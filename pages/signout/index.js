@@ -2,9 +2,15 @@ import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import { faForward } from "@fortawesome/free-solid-svg-icons";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
+import Head from "next/dist/shared/lib/head";
 
 function SignOut() {
   return (
+    <>
+    <Head>
+      <title>Sign Out</title>
+      <meta name='description' content='Sign out of your account' />
+    </Head>
     <div className="flex justify-center items-center h-screen bg-gray-50">
       <div className="relative xl:-top-16 w-full sm:w-9/12 md:w-8/12 lg:w-6/12 xl:w-5/12 2xl:w-4/12 bg-white p-8 sm:p-14 border rounded-lg shadow-lg">
         <Link href="/">
@@ -26,6 +32,7 @@ function SignOut() {
         </Link>
       </div>
     </div>
+    </>
   );
 }
 

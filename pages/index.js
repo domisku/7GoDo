@@ -6,6 +6,10 @@ import HeaderHome from '../components/layout/HeaderHome';
 export default function Home() {
   return (
     <>
+      <Head>
+        <title>GoDo</title>
+        <meta name='description' content='Save precious minutes of your time by organizing your day with GoDo!' />
+      </Head>
       <HeaderHome></HeaderHome>
       <ContentHome></ContentHome>
       <Footer></Footer>
