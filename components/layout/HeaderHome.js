@@ -16,7 +16,7 @@ function HeaderHome() {
       {!session && (
         <ul className="flex h-20">
           <Link href="/signin">
-            <li className="flex items-center h-full px-2 sm:px-6 sm:text-xl font-medium cursor-pointer border-b-2 border-transparent hover:border-red-500 hover:bg-red-50">
+            <li className="flex items-center h-full px-2 sm:px-6 sm:text-xl cursor-pointer border-b-2 border-transparent hover:border-red-500 hover:bg-red-50">
               Log In
             </li>
           </Link>
@@ -25,12 +25,12 @@ function HeaderHome() {
       {session && (
         <ul className="flex h-20">
           <Link href="/app/today">
-            <li className="flex items-center h-full px-2 sm:px-6 font-medium sm:text-xl cursor-pointer border-b-2 border-transparent hover:border-red-500 hover:bg-red-50">
+            <li className="flex items-center h-full px-2 sm:px-6 sm:text-xl cursor-pointer border-b-2 border-transparent hover:border-red-500 hover:bg-red-50">
               Open App
             </li>
           </Link>
           <Link href="signout">
-            <li className="flex items-center h-full px-2 sm:px-6 sm:text-xl font-medium cursor-pointer border-b-2 border-transparent hover:border-red-500 hover:bg-red-50">
+            <li className="flex items-center h-full px-2 sm:px-6 sm:text-xl cursor-pointer border-b-2 border-transparent hover:border-red-500 hover:bg-red-50">
               Log Out
             </li>
           </Link>

@@ -1,23 +1,27 @@
-import { MongoClient, ObjectId } from 'mongodb';
+import { MongoClient, ObjectId } from "mongodb";
 
 async function deleteTask(req, res) {
-    if (req.method === 'DELETE') {
+  if (req.method === "DELETE") {
+    try {
       const data = req.body;
-  
+
       const client = await MongoClient.connect(process.env.MONGODB_URI);
 
       const db = client.db();
-  
-      const tasksCollection = db.collection('tasks');
-  
-      const result = await tasksCollection.deleteOne({ _id: new ObjectId(data.id) });
-  
-      console.log(result);
-  
+
+      const tasksCollection = db.collection("tasks");
+
+      await tasksCollection.deleteOne({
+        _id: new ObjectId(data.id),
+      });
+
       client.close();
-  
-      res.status(201).json({ message: 'Task deleted!' });
+
+      res.status(200).json({ message: "Task deleted!" });
+    } catch (error) {
+      res.status(502);
     }
-  }
-  
-  export default deleteTask;
+  } else res.status(400);
+}
+
+export default deleteTask;

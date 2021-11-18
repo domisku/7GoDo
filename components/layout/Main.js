@@ -13,8 +13,24 @@ function Main(props) {
       {!props.dataDidLoad && <Loading />}
       <Header />
       <Sidebar />
-      <main className={`transition-all ease-in-out duration-320 overflow-hidden z-10 ${props.taskData ? 'w-custom' : 'w-full'} absolute left-0 pl-6 pt-16 pb-28 h-full`}>
-        <div className={`h-screen transition-all duration-300 ${ctx.sidebarExpanded ? 'pl-72' : 'pl-20'} ${props.taskData && ctx.sidebarExpanded ? 'hidden lg:block' : props.taskData || ctx.sidebarExpanded ? 'hidden sm:block' : ''}`}>{props.children}</div>
+      <main
+        className={`transition-all ease-in-out duration-320 overflow-hidden z-10 ${
+          props.taskData ? "w-custom" : "w-full"
+        } absolute left-0 pl-6 pt-16 pb-28 h-full`}
+      >
+        <div
+          className={`h-screen transition-all duration-300 ${
+            ctx.sidebarExpanded ? "pl-72" : "pl-20"
+          } ${
+            props.taskData && ctx.sidebarExpanded
+              ? "hidden lg:block"
+              : props.taskData || ctx.sidebarExpanded
+              ? "hidden sm:block"
+              : ""
+          }`}
+        >
+          {props.children}
+        </div>
       </main>
       <TaskDetails
         taskData={props.taskData}

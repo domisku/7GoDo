@@ -1,7 +1,6 @@
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import {
   faCheckCircle,
-  faBullseye,
   faCalendar,
   faExclamationCircle,
   faTrashAlt,
@@ -23,7 +22,11 @@ function TaskDetails(props) {
   }
 
   return (
-    <div className={`animate-slide fixed w-60 sm:w-72 overflow-y-scroll overflow-x-hidden z-20 right-0 top-12 h-sidebar bg-gray-200 ${!props.taskData ? 'hidden' : ''}`}>
+    <div
+      className={`animate-slide fixed w-60 sm:w-72 overflow-y-scroll overflow-x-hidden z-20 right-0 top-12 h-sidebar bg-gray-200 ${
+        !props.taskData ? "hidden" : ""
+      }`}
+    >
       <div className="p-6 text-lg">
         <input
           value={taskName}
@@ -39,19 +42,35 @@ function TaskDetails(props) {
           id={props.taskData._id}
           onClick={(event) => props.taskCompletedHandler(event)}
         >
-          <Icon className="mr-3 pointer-events-none" icon={faCheckCircle} fixedWidth />
-          {props.taskData.status === "ongoing" ? 'Mark as completed' : 'Restore task'}
+          <Icon
+            className="mr-3 pointer-events-none"
+            icon={faCheckCircle}
+            fixedWidth
+          />
+          {props.taskData.status === "ongoing"
+            ? "Mark as completed"
+            : "Restore task"}
         </div>
         <div
           className="bg-gray-100 h-14 mb-2 flex items-center pl-4 cursor-pointer rounded-lg hover:bg-gray-50 shadow"
           id={props.taskData._id}
           onClick={(event) => props.markAsImportantHandler(event)}
         >
-          <Icon className="mr-3 pointer-events-none" icon={faExclamationCircle} fixedWidth />
-          {props.taskData.important === 'false' ? 'Mark as important' : 'Unmark'}
+          <Icon
+            className="mr-3 pointer-events-none"
+            icon={faExclamationCircle}
+            fixedWidth
+          />
+          {props.taskData.important === "false"
+            ? "Mark as important"
+            : "Unmark"}
         </div>
         <div className="bg-gray-100 h-14 mb-2 flex items-center pl-4 rounded-lg shadow">
-          <Icon className="mr-3 pointer-events-none" icon={faCalendar} fixedWidth />
+          <Icon
+            className="mr-3 pointer-events-none"
+            icon={faCalendar}
+            fixedWidth
+          />
           {props.taskData.date}
         </div>
         <div
@@ -59,11 +78,17 @@ function TaskDetails(props) {
           id={props.taskData._id}
           onClick={(event) => props.taskDeletedHandler(event.target.id)}
         >
-          <Icon className="mr-3 pointer-events-none" icon={faTrashAlt} fixedWidth />
+          <Icon
+            className="mr-3 pointer-events-none"
+            icon={faTrashAlt}
+            fixedWidth
+          />
           Delete task
         </div>
         <textarea
-          className={`bg-gray-100 h-28 mb-2 flex items-center pl-4 pt-2 pr-4 max-h-48 w-full rounded-lg outline-none hover:bg-gray-50 focus:bg-gray-50 shadow ${props.taskData.notes ? 'placeholder-black' : ''}`}
+          className={`bg-gray-100 h-28 mb-2 flex items-center pl-4 pt-2 pr-4 max-h-48 w-full rounded-lg outline-none hover:bg-gray-50 focus:bg-gray-50 shadow ${
+            props.taskData.notes ? "placeholder-black" : ""
+          }`}
           value={notes}
           id={props.taskData._id}
           onFocus={() => setNotes(props.taskData.notes)}
@@ -71,7 +96,12 @@ function TaskDetails(props) {
           onChange={(event) => setNotes(event.target.value)}
           placeholder={props.taskData.notes || "Notes"}
         ></textarea>
-        <button onClick={() => props.clearTaskData()} className='h-12 w-1/2 mt-8 bg-gray-100 hover:bg-gray-50 rounded-lg shadow'>Close</button>
+        <button
+          onClick={() => props.clearTaskData()}
+          className="h-12 w-1/2 mt-8 bg-gray-100 hover:bg-gray-50 rounded-lg shadow"
+        >
+          Close
+        </button>
       </div>
     </div>
   );

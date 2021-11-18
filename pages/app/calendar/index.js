@@ -1,12 +1,11 @@
 import ReactCalendar from "react-calendar";
-import TaskList from "../../../components/TaskList";
+import Tasks from "../../../components/Tasks/Tasks";
 import "react-calendar/dist/Calendar.css";
 import { useState } from "react";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
-import { Transition } from '@headlessui/react';
+import { Transition } from "@headlessui/react";
 import Head from "next/dist/shared/lib/head";
-
 
 const weekday = [
   "Sunday",
@@ -34,25 +33,28 @@ function Calendar() {
   }
 
   function getWeekday(rawDate) {
-      const date = rawDate;
-      return weekday[date.getDay()];
+    const date = rawDate;
+    return weekday[date.getDay()];
   }
 
   function mouseLeaveHandler() {
-      timeout = setTimeout(() => setCalendarActive(false), 3000)
+    timeout = setTimeout(() => setCalendarActive(false), 3000);
   }
 
   function mouseEnterHandler() {
-      clearTimeout(timeout);
+    clearTimeout(timeout);
   }
 
   return (
     <>
       <Head>
         <title>Calendar</title>
-        <meta name='description' content='Explore the calendar. Add a task at any date.' />
+        <meta
+          name="description"
+          content="Explore the calendar. Add a task at any date."
+        />
       </Head>
-      <TaskList date={formatDate(value)} weekday={getWeekday(value)} />
+      <Tasks date={formatDate(value)} weekday={getWeekday(value)} />
       <Transition
         onMouseEnter={() => setCalendarActive(true)}
         onClick={() => setCalendarActive(true)}
@@ -65,10 +67,12 @@ function Calendar() {
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        <div><Icon icon={faCalendar} fixedWidth /></div>
+        <div>
+          <Icon icon={faCalendar} fixedWidth />
+        </div>
       </Transition>
       <Transition
-        className='absolute z-40 bottom-0 right-0 rounded-lg'
+        className="absolute z-40 bottom-0 right-0 rounded-lg"
         show={calendarActive}
         enter="transition-all duration-200"
         enterFrom="opacity-0 -translate-y-20"
@@ -76,13 +80,13 @@ function Calendar() {
         leave="transition-all duration-200"
         leaveFrom="opacity-100 translate-y-0"
         leaveTo="opacity-0 -translate-y-20"
-        >
-        <div onMouseEnter={mouseEnterHandler} onMouseLeave={mouseLeaveHandler} >
-            <ReactCalendar
-                onChange={onChange}
-                value={value}
-                className="pl-6 pr-0 sm:px-4 rounded-tl-lg shadow-2xl p-2 grayscale"
-            />
+      >
+        <div onMouseEnter={mouseEnterHandler} onMouseLeave={mouseLeaveHandler}>
+          <ReactCalendar
+            onChange={onChange}
+            value={value}
+            className="pl-6 pr-0 sm:px-4 rounded-tl-lg shadow-2xl p-2 grayscale"
+          />
         </div>
       </Transition>
     </>
@@ -90,3 +94,5 @@ function Calendar() {
 }
 
 export default Calendar;
+
+Calendar.requireAuth = true;

@@ -1,7 +1,7 @@
 import React from "react";
 
 const SidebarContext = React.createContext({
-    sidebarExpanded: true
+  sidebarExpanded: true,
 });
 
 export const AppProvider = SidebarContext.Provider;

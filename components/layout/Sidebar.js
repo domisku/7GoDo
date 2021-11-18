@@ -29,8 +29,8 @@ function Sidebar() {
 
   const router = useRouter();
   const { mutate } = useSWRConfig();
-  const { data: session, status } = useSession();
-  const { data, error } = useSWR(
+  const { data: session } = useSession();
+  const { data } = useSWR(
     session ? `/api/${session.user.name || session.user.email}/lists` : null,
     fetcher
   );
@@ -51,7 +51,8 @@ function Sidebar() {
       false
     );
 
-    await listToDatabase(listData);
+    const status = await listToDatabase(listData);
+    if (status !== 201) router.push("/error");
 
     mutate(`/api/${session.user.name || session.user.email}/lists`);
   }
@@ -68,11 +69,12 @@ function Sidebar() {
         false
       );
 
-      await deleteList({ id: event.target.id });
+      const status = await deleteList({ id: event.target.id });
+      if (status !== 200) router.push("/error");
 
       mutate(`/api/${session.user.name || session.user.email}/lists`);
 
-      if (router.query.listId) router.replace('/app/today');
+      if (router.query.listId) router.replace("/app/today");
     }
   }
 
@@ -90,18 +92,16 @@ function Sidebar() {
         >
           GoDo
           <Icon
-            className={`${
-              !ctx.sidebarExpanded
-                ? "invisible"
-                : "ml-1.5"
-            }`}
+            className={`${!ctx.sidebarExpanded ? "invisible" : "ml-1.5"}`}
             icon={faForward}
           />
         </h1>
       </Link>
       <button
         onClick={ctx.toggleSidebar}
-        className={`absolute top-5 transition-all duration-100 ${!ctx.sidebarExpanded ? 'w-10/12' : 'w-12'} h-12 right-1.5 flex justify-center items-center text-xl text-right hover:bg-white rounded-full text-gray-500 bg-gray-100 shadow-lg`}
+        className={`absolute top-5 transition-all duration-100 ${
+          !ctx.sidebarExpanded ? "w-10/12" : "w-12"
+        } h-12 right-1.5 flex justify-center items-center text-xl text-right hover:bg-white rounded-full text-gray-500 bg-gray-100 shadow-lg`}
       >
         <Icon
           icon={ctx.sidebarExpanded ? faChevronLeft : faChevronRight}
@@ -160,9 +160,13 @@ function Sidebar() {
       </ul>
       <ul className="text-lg cursor-pointer whitespace-nowrap">
         {data &&
-          data.map((list, index) => {
+          data.map((list) => {
             return (
-              <Link href={list._id ? `/app/list/${list._id}?title=${list.list}` : '#'}>
+              <Link
+                href={
+                  list._id ? `/app/list/${list._id}?title=${list.list}` : "#"
+                }
+              >
                 <li
                   id={list._id}
                   className={`group h-10 flex items-center py-1.5 pl-6 hover:bg-white ${
@@ -172,14 +176,24 @@ function Sidebar() {
                   }`}
                 >
                   <Icon className="mr-3" icon={faListUl} fixedWidth />
-                  {ctx.sidebarExpanded && <span className='pointer-events-none truncate w-8/12'>{list.list}</span>}
-                  {ctx.sidebarExpanded && <button
-                    id={list._id}
-                    onClick={listDeletedHandler}
-                    className="invisible group-hover:visible transition duration-300 hover:text-red-500 text-sm ml-auto mr-3"
-                  >
-                    <Icon className='pointer-events-none' icon={faTrashAlt} fixedWidth />
-                  </button>}
+                  {ctx.sidebarExpanded && (
+                    <span className="pointer-events-none truncate w-8/12">
+                      {list.list}
+                    </span>
+                  )}
+                  {ctx.sidebarExpanded && (
+                    <button
+                      id={list._id}
+                      onClick={listDeletedHandler}
+                      className="invisible group-hover:visible transition duration-300 hover:text-red-500 text-sm ml-auto mr-3"
+                    >
+                      <Icon
+                        className="pointer-events-none"
+                        icon={faTrashAlt}
+                        fixedWidth
+                      />
+                    </button>
+                  )}
                 </li>
               </Link>
             );
