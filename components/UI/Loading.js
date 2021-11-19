@@ -9,7 +9,7 @@ function Loading() {
       </div>
       <div className="absolute bottom-28 invisible lg:visible">
         <h1 className="text-4xl text-red-500 cursor-pointer mb-10 font-medium pt-6 pl-6">
-          GoDo
+          7GoDo
           <Icon className="ml-1" icon={faForward} />
         </h1>
       </div>

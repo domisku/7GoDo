@@ -9,10 +9,10 @@ function ContentHome() {
       <section className="flex justify-center items-center h-full my-28">
         <div className="flex flex-col items-center pt-4 mb-36 w-4/5 md:w-3/5 xl:w-1/2 h-4/5">
           <h2 className="text-4xl sm:text-6xl font-bold text-center leading-tight w-full mb-12">
-            Get everything done with GoDo
+            Get everything done with 7GoDo
           </h2>
           {!session && (
-            <Link href="signin">
+            <Link href="/signin">
               <button className="flex items-center justify-center mb-10 w-40 px-4 py-2 bg-red-500 font-medium text-lg rounded-lg text-white hover:opacity-90">
                 Get Started
               </button>
@@ -40,7 +40,7 @@ function ContentHome() {
             Manage your time efficiently
           </h3>
           <p className="text-xl w-10/12">
-            Save precious minutes of your time by organizing your day with GoDo.
+            Save precious minutes of your time by organizing your day with 7GoDo.
             Organize your tasks, lists and reminders without breaking a sweat.
             Being productive has never been so simple!
           </p>
@@ -66,19 +66,19 @@ function ContentHome() {
             Join our friendly community
           </h3>
           <p className="text-xl w-10/12">
-            GoDo has helped many people organize their daily tasks. Join the
+            7GoDo has helped many people organize their daily tasks. Join the
             crowd! We value our customers and listen to your feedback to improve
-            your experience with GoDo.
+            your experience with 7GoDo.
           </p>
         </div>
       </section>
       <section className="flex justify-center items-center h-full py-24 lg:py-0 lg:h-screen overflow-hidden bg-gray-50">
         <div className="flex flex-col items-center w-full h-4/5">
           <h2 className="text-4xl sm:text-5xl font-bold text-center mb-10 mt-10 leading-tight w-4/5">
-            Reach your goals with GoDo
+            Reach your goals with 7GoDo
           </h2>
           {!session && (
-            <Link href="signin">
+            <Link href="/signin">
               <button className="flex items-center justify-center mb-16 w-40 px-4 py-2 bg-red-500 font-medium text-lg rounded-lg text-white hover:opacity-90">
                 Get Started
               </button>

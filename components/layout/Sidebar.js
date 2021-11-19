@@ -90,7 +90,7 @@ function Sidebar() {
             !ctx.sidebarExpanded ? "invisible" : ""
           } w-32 text-3xl text-red-500 cursor-pointer mb-10 font-medium pt-6 pl-6 whitespace-nowrap`}
         >
-          GoDo
+          7GoDo
           <Icon
             className={`${!ctx.sidebarExpanded ? "invisible" : "ml-1.5"}`}
             icon={faForward}
