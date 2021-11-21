@@ -7,10 +7,12 @@ import { useEffect, useState } from "react";
 import DialogBox from "../../components/UI/DialogBox";
 import Head from "next/dist/shared/lib/head";
 import { useRouter } from "next/router";
+import Loading from "../../components/UI/Loading";
 
 function SignIn({ providers }) {
   const [email, setEmail] = useState("");
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { status } = useSession();
   const router = useRouter();
@@ -22,8 +24,10 @@ function SignIn({ providers }) {
   function formSubmitHandler(event) {
     event.preventDefault();
 
-    if (emailIsValid())
+    if (emailIsValid()) {
       signIn("email", { email, callbackUrl: process.env.NEXTAUTH_URL });
+      setLoading(true);
+    }
   }
 
   function inputChangeHandler(event) {
@@ -42,7 +46,9 @@ function SignIn({ providers }) {
     }
   }
 
-  return (
+  if (loading) return <Loading />;
+
+  if (!loading) return (
     <>
       <Head>
         <title>Sign In</title>
@@ -69,10 +75,12 @@ function SignIn({ providers }) {
                   <div key={provider.name}>
                     <button
                       className="flex items-center justify-center w-full h-10 mb-2 px-4 py-2 border-2 font-medium text-md rounded-lg hover:bg-gray-100"
-                      onClick={() =>
+                      onClick={() => {
                         signIn(provider.id, {
                           callbackUrl: process.env.NEXTAUTH_URL,
-                        })
+                        });
+                        setLoading(true);
+                      }
                       }
                     >
                       <Icon className="text-xl mr-2" icon={faGithub} />
