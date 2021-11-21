@@ -15,6 +15,7 @@ import useSWR, { useSWRConfig } from "swr";
 import router from "next/router";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
+let audio = new Audio("/ping.mp3");
 
 function Tasks(props) {
   const { mutate } = useSWRConfig();
@@ -81,7 +82,6 @@ function Tasks(props) {
       });
 
       if (value === "completed") {
-        let audio = new Audio("/ping.mp3");
         audio.play();
       }
 
