@@ -1,7 +1,7 @@
 import Head from "next/head";
 import ContentHome from "../components/home/ContentHome";
 import Footer from "../components/layout/Footer";
-import HeaderHome from "../components/layout/HeaderHome";
+import HeaderHome from "../components/home/HeaderHome";
 import { useSession } from "next-auth/react";
 import Loading from "../components/UI/Loading";
 
