@@ -14,8 +14,8 @@ function ContentHome() {
     return (
       <main>
         <section className="flex justify-center items-center h-full my-28">
-          <div className="flex flex-col items-center pt-4 mb-36 w-4/5 md:w-3/5 xl:w-1/2 h-4/5">
-            <h2 className="text-4xl sm:text-6xl font-bold text-center leading-tight w-full mb-12">
+          <div className="flex flex-col items-center pt-4 mb-36 w-full h-4/5">
+            <h2 className="text-4xl sm:text-6xl font-bold text-center leading-tight w-4/5 md:w-3/5 xl:w-1/2 mb-12">
               Get everything done with 7GoDo
             </h2>
             {!session && (
@@ -35,7 +35,7 @@ function ContentHome() {
                 </button>
               </Link>
             )}
-            <div className="flex justify-center items-center bg-red-100 p-1 rounded-xl w-full sm:w-5/6 lg:w-4/6 mt-8">
+            <div className="flex justify-center items-center bg-red-100 p-1 rounded-xl w-5/6 sm:w-4/6 md:w-3/6 lg:w-2/6 mt-8">
               <img
                 className="rounded-xl"
                 alt="calendar notebook"
@@ -104,7 +104,7 @@ function ContentHome() {
                 </button>
               </Link>
             )}
-            <div className="flex justify-center items-center bg-red-100 p-1 rounded-xl w-full w-5/6 sm:w-4/6 md:w-3/6 lg:w-2/6">
+            <div className="flex justify-center items-center bg-red-100 p-1 rounded-xl w-5/6 sm:w-4/6 md:w-3/6 lg:w-2/6">
               <img
                 className="rounded-xl"
                 alt="floating balloons in a green background"
