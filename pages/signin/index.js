@@ -62,7 +62,7 @@ function SignIn({ providers }) {
           </Link>
           <h2 className="text-3xl font-bold mb-6">Sign In</h2>
           <div>
-            {Object.values(providers).map((provider) => {
+            {providers && Object.values(providers).map((provider) => {
               if (provider.name === "Email") return;
               else
                 return (
