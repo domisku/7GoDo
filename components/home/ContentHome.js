@@ -35,7 +35,7 @@ function ContentHome() {
                 </button>
               </Link>
             )}
-            <div className="flex justify-center bg-red-100 p-1 rounded-xl w-full sm:w-5/6 lg:w-4/6 mt-8">
+            <div className="flex justify-center items-center bg-red-100 p-1 rounded-xl w-full sm:w-5/6 lg:w-4/6 mt-8">
               <img
                 className="rounded-xl"
                 alt="calendar notebook"
@@ -104,7 +104,7 @@ function ContentHome() {
                 </button>
               </Link>
             )}
-            <div className="flex justify-center bg-red-100 p-1 rounded-xl w-full w-5/6 sm:w-4/6 md:w-3/6 lg:w-2/6">
+            <div className="flex justify-center items-center bg-red-100 p-1 rounded-xl w-full w-5/6 sm:w-4/6 md:w-3/6 lg:w-2/6">
               <img
                 className="rounded-xl"
                 alt="floating balloons in a green background"
