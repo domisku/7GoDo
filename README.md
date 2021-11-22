@@ -1,29 +1,39 @@
-# Next.js + Tailwind CSS Example
+# 7GoDo (todo app website)
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v2.2)](https://blog.tailwindcss.com/tailwindcss-2-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+7GoDo is a website where users can create, edit, delete tasks to help them organize their lives.  
+Website uses two authentication methods: passwordless login and login with github.  
+Authentication is handled by next-auth.  
 
-It uses the new [`Just-in-Time Mode`](https://tailwindcss.com/docs/just-in-time-mode) for Tailwind CSS.
+The project was created using Next.js, styled with Tailwind.css, transitions made with Headless UI, CRUD operations are handled with MongoDB.
+
+## Features  
+
+- Create, rename, delete tasks
+- Create, delete user defined lists
+- Edit tasks: add notes to a task, change task name, mark task as important
+- Search bar for finding tasks
+- Calendar section to add tasks at any date
+- Works on mobile devices and desktop
+- Passwordless login and login with github
 
 ## Preview
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
-
-## Deploy your own
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+Preview deployed project on [Vercel](https://7godo.vercel.app/)
 
 ## How to use
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+Follow these steps to run this project locally:  
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
+1. Clone the repository
+2. Run "npm install" command in your terminal to install the required modules
+3. Set up the following environmental variables:  
 ```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+NEXTAUTH_URL=<This is your local machine server URL, usually "http://localhost:3000/">
+MONGODB_URI=<Your mongoDB uri with your credentials>
+GITUB_ID=<Needed to login with github. Go to developer settings on your github account and set up an OAuth app>
+GITHUB_SECRET=<Also found on developer settings>
+EMAIL_SERVER=<Lookup next-auth documentation for email provider>
+EMAIL_FROM=<Lookup next-auth documentation for email provider>
+NODE_ENV=<Set either as "development" or "production">
+```
+4. Run "npm start dev" command from the terminal
