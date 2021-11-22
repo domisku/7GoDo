@@ -19,6 +19,7 @@ import listToDatabase from "../../utils/listToDatabase";
 import { useRouter } from "next/router";
 import SidebarContext from "../../context/sidebar-context";
 import deleteList from "../../utils/deleteList";
+import Spinner from "../UI/Spinner";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -175,7 +176,12 @@ function Sidebar() {
                       : ""
                   }`}
                 >
-                  <Icon className="mr-3" icon={faListUl} fixedWidth />
+                  <Icon
+                    className={`mr-3 ${!list._id ? "invisible" : ""}`}
+                    icon={faListUl}
+                    fixedWidth
+                  />
+                  {!list._id && <Spinner />}
                   {ctx.sidebarExpanded && (
                     <span className="pointer-events-none truncate w-8/12">
                       {list.list}

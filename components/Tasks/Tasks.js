@@ -13,6 +13,7 @@ import updateTask from "../../utils/updateTask";
 import deleteTask from "../../utils/deleteTask";
 import useSWR, { useSWRConfig } from "swr";
 import router from "next/router";
+import Spinner from "../UI/Spinner";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -318,7 +319,7 @@ function Tasks(props) {
                       id={task._id}
                       onClick={taskClickHandler}
                       className={`w-full ${
-                        taskData._id === task._id ? "" : "h-12"
+                        taskData._id === task._id ? "h-full" : "h-12"
                       } pl-4 py-2.5 text-lg cursor-pointer flex items-center rounded-lg ${
                         index % 2 === 0 ? "bg-gray-100" : "bg-gray-50"
                       } ${
@@ -330,10 +331,11 @@ function Tasks(props) {
                       <Icon
                         id={task._id}
                         onClick={taskCompletedHandler}
-                        className="mr-3"
+                        className={`mr-3 ${!task._id ? "invisible" : ""}`}
                         icon={faCircle}
                         fixedWidth
                       />
+                      {!task._id && <Spinner />}
                       <span
                         className={`${
                           taskData._id === task._id ? "" : "truncate"
@@ -384,7 +386,7 @@ function Tasks(props) {
                     id={task._id}
                     onClick={taskClickHandler}
                     className={`line-through w-full ${
-                      taskData._id === task._id ? "" : "h-12"
+                      taskData._id === task._id ? "h-full" : "h-12"
                     } pl-4 py-2.5 text-lg cursor-pointer flex items-center rounded-lg ${
                       index % 2 === 0 ? "bg-gray-100" : "bg-gray-50"
                     } ${
