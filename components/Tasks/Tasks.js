@@ -280,6 +280,7 @@ function Tasks(props) {
       changeTaskNameHandler={changeTaskNameHandler}
       changeNotesHandler={changeNotesHandler}
     >
+      {loading && <Loading />}
       <h2 className="w-11/12 break-words text-xl font-medium mb-4">
         {props.filter === "today"
           ? "Today"
