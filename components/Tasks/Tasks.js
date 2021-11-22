@@ -268,7 +268,7 @@ function Tasks(props) {
             <Icon className="mr-3" icon={faPlus} fixedWidth></Icon>
           </button>
           <input
-            className="w-9/12 outline-none bg-transparent placeholder-red-500"
+            className="w-full outline-none bg-transparent placeholder-red-500"
             placeholder="New task"
             value={input}
             onChange={(event) => setInput(event.target.value)}
