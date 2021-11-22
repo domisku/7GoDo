@@ -12,7 +12,7 @@ async function deleteTask(req, res) {
       const tasksCollection = db.collection("tasks");
 
       await tasksCollection.deleteOne({
-        _id: new ObjectId(data.id),
+        _id: data.id,
       });
 
       client.close();

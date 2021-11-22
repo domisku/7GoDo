@@ -15,6 +15,7 @@ import useSWR, { useSWRConfig } from "swr";
 import router from "next/router";
 import Spinner from "../UI/Spinner";
 import Loading from "../UI/Loading";
+import { v4 as uuidv4 } from 'uuid';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -36,6 +37,7 @@ function Tasks(props) {
     event.preventDefault();
 
     const taskData = {
+      _id: createId(),
       user: session.user.name || session.user.email,
       task: input,
       date: props.date || formatTodaysDate(),
@@ -56,6 +58,10 @@ function Tasks(props) {
     if (status !== 201) router.push("/error");
 
     mutate(`/api/${session.user.name || session.user.email}`);
+  }
+
+  function createId() {
+    return uuidv4();
   }
 
   function formatTodaysDate() {
