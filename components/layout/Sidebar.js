@@ -19,6 +19,7 @@ import listToDatabase from "../../utils/listToDatabase";
 import { useRouter } from "next/router";
 import SidebarContext from "../../context/sidebar-context";
 import deleteList from "../../utils/deleteList";
+import { v4 as uuidv4 } from "uuid";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -39,6 +40,7 @@ function Sidebar() {
     event.preventDefault();
 
     const listData = {
+      _id: createId(),
       user: session.user.name || session.user.email,
       list: newList,
     };
@@ -55,6 +57,10 @@ function Sidebar() {
     if (status !== 201) router.push("/error");
 
     mutate(`/api/${session.user.name || session.user.email}/lists`);
+  }
+
+  function createId() {
+    return uuidv4();
   }
 
   async function listDeletedHandler(event) {
