@@ -1,4 +1,4 @@
-import { MongoClient, ObjectId } from "mongodb";
+import { MongoClient } from "mongodb";
 
 async function deleteTask(req, res) {
   if (req.method === "DELETE") {

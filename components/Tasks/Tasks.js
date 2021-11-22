@@ -13,9 +13,7 @@ import updateTask from "../../utils/updateTask";
 import deleteTask from "../../utils/deleteTask";
 import useSWR, { useSWRConfig } from "swr";
 import router from "next/router";
-import Spinner from "../UI/Spinner";
-import Loading from "../UI/Loading";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -29,7 +27,6 @@ function Tasks(props) {
 
   const [input, setInput] = useState("");
   const [taskData, setTaskData] = useState("");
-  const [loading, setLoading] = useState(false);
 
   let audio = new Audio("/ping.mp3");
 
@@ -74,63 +71,48 @@ function Tasks(props) {
   }
 
   async function taskCompletedHandler(event) {
-    if (event.target.id) {
-      let value;
+    let value;
 
-      const updatedData = data.map((task) => {
-        if (task._id === event.target.id && task.status === "ongoing") {
-          task.status = "completed";
-          value = "completed";
-        } else if (
-          task._id === event.target.id &&
-          task.status === "completed"
-        ) {
-          task.status = "ongoing";
-          value = "ongoing";
-        }
-        return task;
-      });
-
-      if (value === "completed") {
-        audio.play();
+    const updatedData = data.map((task) => {
+      if (task._id === event.target.id && task.status === "ongoing") {
+        task.status = "completed";
+        value = "completed";
+      } else if (task._id === event.target.id && task.status === "completed") {
+        task.status = "ongoing";
+        value = "ongoing";
       }
+      return task;
+    });
 
-      setLoading(true);
-
-      mutate(
-        `/api/${session.user.name || session.user.email}`,
-        [...updatedData, {}],
-        false
-      );
-
-      setTaskData(
-        ...updatedData.filter((task) => task._id === event.target.id)
-      );
-
-      const response = await updateTask({
-        id: event.target.id,
-        update: "status",
-        value,
-      });
-      if (response.status !== 200) router.push("/error");
-
-      mutate(`/api/${session.user.name || session.user.email}`);
-
-      setLoading(false);
+    if (value === "completed") {
+      audio.play();
     }
+
+    mutate(
+      `/api/${session.user.name || session.user.email}`,
+      [...updatedData, {}],
+      false
+    );
+
+    setTaskData(...updatedData.filter((task) => task._id === event.target.id));
+
+    const response = await updateTask({
+      id: event.target.id,
+      update: "status",
+      value,
+    });
+    if (response.status !== 200) router.push("/error");
+
+    mutate(`/api/${session.user.name || session.user.email}`);
   }
 
   function taskClickHandler(event) {
-    if (event.target.id) {
-      const taskDetails = data.filter((task) => task._id === event.target.id);
-      setTaskData(...taskDetails);
-    }
+    const taskDetails = data.filter((task) => task._id === event.target.id);
+    setTaskData(...taskDetails);
   }
 
   async function taskDeletedHandler(id) {
     const filteredData = data.filter((task) => task._id !== id);
-
-    setLoading(true);
 
     mutate(
       `/api/${session.user.name || session.user.email}`,
@@ -144,112 +126,88 @@ function Tasks(props) {
     if (status !== 200) router.push("/error");
 
     mutate(`/api/${session.user.name || session.user.email}`);
-
-    setLoading(false);
   }
 
   async function markAsImportantHandler(event) {
-    if (event.target.id) {
-      let value;
+    let value;
 
-      const updatedData = data.map((task) => {
-        if (task._id === event.target.id && task.important === "false") {
-          task.important = "true";
-          value = "true";
-        } else if (task._id === event.target.id && task.important === "true") {
-          task.important = "false";
-          value = "false";
-        }
-        return task;
-      });
+    const updatedData = data.map((task) => {
+      if (task._id === event.target.id && task.important === "false") {
+        task.important = "true";
+        value = "true";
+      } else if (task._id === event.target.id && task.important === "true") {
+        task.important = "false";
+        value = "false";
+      }
+      return task;
+    });
 
-      setLoading(true);
+    mutate(
+      `/api/${session.user.name || session.user.email}`,
+      [...updatedData, {}],
+      false
+    );
 
-      mutate(
-        `/api/${session.user.name || session.user.email}`,
-        [...updatedData, {}],
-        false
-      );
+    const response = await updateTask({
+      id: event.target.id,
+      update: "important",
+      value,
+    });
+    if (response.status !== 200) router.push("/error");
 
-      const response = await updateTask({
-        id: event.target.id,
-        update: "important",
-        value,
-      });
-      if (response.status !== 200) router.push("/error");
-
-      mutate(`/api/${session.user.name || session.user.email}`);
-
-      setLoading(false);
-    }
+    mutate(`/api/${session.user.name || session.user.email}`);
   }
 
   async function changeTaskNameHandler(event) {
-    if (event.target.id) {
-      const updatedData = data.map((task) => {
-        if (task._id === event.target.id) {
-          task.task = event.target.value;
-        }
-        return task;
-      });
+    const updatedData = data.map((task) => {
+      if (task._id === event.target.id) {
+        task.task = event.target.value;
+      }
+      return task;
+    });
 
-      setLoading(true);
+    mutate(
+      `/api/${session.user.name || session.user.email}`,
+      [...updatedData, {}],
+      false
+    );
 
-      mutate(
-        `/api/${session.user.name || session.user.email}`,
-        [...updatedData, {}],
-        false
-      );
+    setTaskData(...updatedData.filter((task) => task._id === event.target.id));
 
-      setTaskData(
-        ...updatedData.filter((task) => task._id === event.target.id)
-      );
+    const response = await updateTask({
+      id: event.target.id,
+      update: "task",
+      task: event.target.value,
+    });
+    if (response.status !== 200) router.push("/error");
 
-      const response = await updateTask({
-        id: event.target.id,
-        update: "task",
-        task: event.target.value,
-      });
-      if (response.status !== 200) router.push("/error");
-
-      mutate(`/api/${session.user.name || session.user.email}`);
-
-      setLoading(false);
-    }
+    mutate(`/api/${session.user.name || session.user.email}`);
   }
 
   async function changeNotesHandler(event) {
-    if (event.target.id) {
-      const updatedData = data.map((task) => {
-        if (task._id === event.target.id) {
-          task.notes = event.target.value;
-        }
-        return task;
-      });
+    const updatedData = data.map((task) => {
+      if (task._id === event.target.id) {
+        task.notes = event.target.value;
+      }
+      return task;
+    });
 
-      setLoading(true);
+    mutate(
+      `/api/${session.user.name || session.user.email}`,
+      [...updatedData, {}],
+      false
+    );
 
-      mutate(
-        `/api/${session.user.name || session.user.email}`,
-        [...updatedData, {}],
-        false
-      );
+    setTaskData(...updatedData.filter((task) => task._id === event.target.id));
 
-      setTaskData(
-        ...updatedData.filter((task) => task._id === event.target.id)
-      );
+    const response = await updateTask({
+      id: event.target.id,
+      update: "notes",
+      notes: event.target.value,
+    });
+    if (response.status !== 200) router.push("/error");
 
-      const response = await updateTask({
-        id: event.target.id,
-        update: "notes",
-        notes: event.target.value,
-      });
-      if (response.status !== 200) router.push("/error");
-
-      mutate(`/api/${session.user.name || session.user.email}`);
-
-      setLoading(false);
-    }
+    mutate(`/api/${session.user.name || session.user.email}`);
   }
 
   function clearTaskData() {
@@ -359,11 +317,10 @@ function Tasks(props) {
                       <Icon
                         id={task._id}
                         onClick={taskCompletedHandler}
-                        className={`mr-3 ${!task._id ? "invisible" : ""}`}
+                        className="mr-3"
                         icon={faCircle}
                         fixedWidth
                       />
-                      {!task._id && <Spinner />}
                       <span
                         className={`${
                           taskData._id === task._id ? "" : "truncate"

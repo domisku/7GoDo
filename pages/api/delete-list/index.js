@@ -1,4 +1,4 @@
-import { MongoClient, ObjectId } from "mongodb";
+import { MongoClient } from "mongodb";
 
 async function deleteList(req, res) {
   if (req.method === "DELETE") {
@@ -11,7 +11,7 @@ async function deleteList(req, res) {
 
       const listsCollection = db.collection("lists");
       await listsCollection.deleteOne({
-        _id: new ObjectId(data.id),
+        _id: data.id,
       });
 
       const tasksCollection = db.collection("tasks");
