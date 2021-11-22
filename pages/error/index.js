@@ -8,6 +8,7 @@ function Error() {
     <>
       <Head>
         <title>Error!</title>
+        <link rel="icon" href="/favicon.png" />
         <meta name="description" content="Something went wrong!" />
       </Head>
       <div className="flex justify-center items-center h-screen bg-gray-50">
