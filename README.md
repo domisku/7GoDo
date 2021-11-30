@@ -40,6 +40,6 @@ GITUB_ID=<Needed to login with github. Go to developer settings on your github a
 GITHUB_SECRET=<Also found on developer settings>
 EMAIL_SERVER=<Lookup next-auth documentation for email provider>
 EMAIL_FROM=<Lookup next-auth documentation for email provider>
-NODE_ENV=<Set either as "development" or "production">
+NODE_ENV=<Set as "development">
 ```
 4. Run "npm start dev" command from the terminal
