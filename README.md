@@ -18,7 +18,13 @@ The project was created using Next.js, styled with Tailwind.css, transitions mad
 
 ## Preview
 
-Preview deployed project on [Vercel](https://7godo.vercel.app/)
+Preview deployed project on [Vercel](https://7godo.vercel.app/)  
+
+![Home page](https://user-images.githubusercontent.com/84922120/144010300-938608e3-9d05-4c85-81ea-8c7afc89847b.png)
+
+![App page](https://user-images.githubusercontent.com/84922120/144010308-95b52408-d8e1-456c-8cd9-8bd3ccb7bd62.png)
+
+![Login page](https://user-images.githubusercontent.com/84922120/144010315-ca252270-2c47-4f8f-9a98-6c545904af71.png)
 
 ## How to use
 
